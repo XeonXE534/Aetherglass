@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c87f81rhahydt"]
+
+[ext_resource type="PackedScene" uid="uid://dtcjyc1dy4n2k" path="res://scenes/player/player.tscn" id="1_3nrhp"]
+[ext_resource type="Texture2D" uid="uid://duc4ojj1u1qau" path="res://tests/test-art/TEST-BG.png" id="1_6h17p"]
+[ext_resource type="Texture2D" uid="uid://kal3hyfvn8nn" path="res://icon.svg" id="2_vhhne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nrhp"]
+size = Vector2(23650, 9958)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Test-bg" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1878, 2071)
+scale = Vector2(113.564, 99.1016)
+texture = ExtResource("1_6h17p")
+
+[node name="Player" parent="." instance=ExtResource("1_3nrhp")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, 5135)
+shape = SubResource("RectangleShape2D_3nrhp")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
+texture_filter = 1
+position = Vector2(-341, 1421)
+scale = Vector2(100, 100)
+texture = ExtResource("2_vhhne")
