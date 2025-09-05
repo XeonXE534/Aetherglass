@@ -4,7 +4,7 @@ func _ready() -> void:
 		print("GLOBALS LOADED")
 		
 #player vars and consts
-@export var P_SPEED: float = 300.0
+@export var P_SPEED: float = 250.0
 @export var P_JUMP_VELOCITY: float = -500.0
 @export var P_GRAVITY: int = 20
 @export var P_HP: int = 20

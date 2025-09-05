@@ -5,13 +5,16 @@ var jumping: bool = false
 var direction2: bool = false
 
 @onready var animation = $Animations
+@onready var hp = $HP/MarginContainer/TextureProgressBar
 
 func _ready() -> void:
+	hp.value = 100
 	print("PLAYER LOADED")
 	animation.play("Idle")
 
 func _process(_delta: float) -> void:
 	_AnimationLogic()
+	_Health()
 
 func _physics_process(_delta: float) -> void:
 	_Gravity()
@@ -51,17 +54,8 @@ func _Movement():
 
 func _AnimationLogic(): 
 	if attacking: 
-		#animation.play("Atk-1")
+		#Attack animations are here but not implemented cuz magic system isnt here yet
 		pass
-		
-	elif not is_on_floor(): 
-
-		if jumping:
-			#animation.play("Jump")
-			pass
-		if velocity.y >= 10:
-			#animation.play("Fall")
-			pass
 			
 	elif is_zero_approx(velocity.x): 
 		animation.play("Idle")
@@ -70,3 +64,11 @@ func _AnimationLogic():
 		animation.play("Run") 
 		
 	animation.flip_h = direction2
+
+func _Health():
+	if Input.is_action_just_pressed("J"):
+		hp.value = clamp(hp.value - 5, hp.min_value, hp.max_value)
+		
+		if hp.value == 0:
+			animation.play("Death")
+			queue_free()

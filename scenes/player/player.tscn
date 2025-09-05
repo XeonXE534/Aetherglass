@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dtcjyc1dy4n2k"]
+[gd_scene load_steps=48 format=3 uid="uid://dtcjyc1dy4n2k"]
 
 [ext_resource type="Texture2D" uid="uid://ddag3d43dscr5" path="res://assets/art/Blue_witch/B_witch_idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bhpkxc2kcoujt" path="res://scripts/player/player.gd" id="1_75vfm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ckuywgfeofru2" path="res://assets/art/Blue_witch/B_witch_death.png" id="2_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cydr4q5sxjp0l" path="res://assets/art/Blue_witch/B_witch_run.png" id="4_0owmy"]
 [ext_resource type="Texture2D" uid="uid://w1sc1i4clo4s" path="res://assets/art/Blue_witch/B_witch_take_damage.png" id="5_qek5x"]
+[ext_resource type="PackedScene" uid="uid://esvnlk1dsgcv" path="res://scenes/ui/HP.tscn" id="7_0owmy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(14, 36)
@@ -306,6 +307,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_75vfm")
+metadata/_edit_vertical_guides_ = [-56.0, -57.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -2)
@@ -314,8 +316,14 @@ shape = SubResource("RectangleShape2D_dovo2")
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5gtgg")
-animation = &"Idle"
+animation = &"Run"
+frame = 4
+frame_progress = 0.0059169
 speed_scale = 1.7
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+offset = Vector2(0, -50)
+zoom = Vector2(2, 2)
+
+[node name="HP" parent="." instance=ExtResource("7_0owmy")]
+position = Vector2(-267, -195)
