@@ -1,9 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://dtcjyc1dy4n2k"]
+[gd_scene load_steps=54 format=3 uid="uid://dtcjyc1dy4n2k"]
 
 [ext_resource type="Texture2D" uid="uid://ddag3d43dscr5" path="res://assets/art/Blue_witch/B_witch_idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bhpkxc2kcoujt" path="res://scripts/player/player.gd" id="1_75vfm"]
 [ext_resource type="Texture2D" uid="uid://c6c31rascg48" path="res://assets/art/Blue_witch/B_witch_attack.png" id="1_p47bc"]
 [ext_resource type="Texture2D" uid="uid://ckuywgfeofru2" path="res://assets/art/Blue_witch/B_witch_death.png" id="2_75vfm"]
+[ext_resource type="Texture2D" uid="uid://blcd2yxcvq0qk" path="res://assets/art/Blue_witch/B_witch_charge.png" id="3_qek5x"]
 [ext_resource type="Texture2D" uid="uid://cydr4q5sxjp0l" path="res://assets/art/Blue_witch/B_witch_run.png" id="4_0owmy"]
 [ext_resource type="Texture2D" uid="uid://w1sc1i4clo4s" path="res://assets/art/Blue_witch/B_witch_take_damage.png" id="5_qek5x"]
 [ext_resource type="PackedScene" uid="uid://esvnlk1dsgcv" path="res://scenes/ui/HP.tscn" id="7_0owmy"]
@@ -46,6 +47,26 @@ region = Rect2(0, 322, 104, 46)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_p47bc")
 region = Rect2(0, 368, 104, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo27k"]
+atlas = ExtResource("3_qek5x")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_genst"]
+atlas = ExtResource("3_qek5x")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niom3"]
+atlas = ExtResource("3_qek5x")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttakn"]
+atlas = ExtResource("3_qek5x")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw8a5"]
+atlas = ExtResource("3_qek5x")
+region = Rect2(0, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uf5tr"]
 atlas = ExtResource("2_75vfm")
@@ -199,6 +220,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vo27k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_genst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niom3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttakn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw8a5")
+}],
+"loop": true,
+"name": &"Charge_1_wa",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uf5tr")
 }, {
 "duration": 1.0,
@@ -316,9 +357,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5gtgg")
-animation = &"Run"
-frame = 4
-frame_progress = 0.0059169
+animation = &"Charge_1_wa"
 speed_scale = 1.7
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -327,3 +366,9 @@ zoom = Vector2(2, 2)
 
 [node name="HP" parent="." instance=ExtResource("7_0owmy")]
 position = Vector2(-267, -195)
+
+[node name="AtkTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="AtkTimer" to="." method="_on_AtkTimer_timeout"]

@@ -9,7 +9,6 @@ var direction2: bool = false
 
 func _ready() -> void:
 	hp.value = 100
-	print("PLAYER LOADED")
 	animation.play("Idle")
 
 func _process(_delta: float) -> void:
@@ -20,15 +19,33 @@ func _physics_process(_delta: float) -> void:
 	_Gravity()
 	_Jump()
 	_Movement()
+	_Attack()
 
+func _Attack():
+	if Input.is_action_just_pressed("SPACE") and not attacking:
+		print('Attacked')
+		attacking = true
+		$AtkTimer.start()
+		_ShootProjectile()
+
+func _on_AtkTimer_timeout():
+	attacking = false
+
+func _ShootProjectile():
+	var projectile = preload("res://scenes/player/waterball.tscn").instantiate()
+	get_parent().add_child(projectile)
+	projectile.position = position
+	
+	if direction2:
+		projectile.direction = Vector2.LEFT
+	else:
+		projectile.direction = Vector2.RIGHT
+	
+	
 func _Gravity(): 
 	if not is_on_floor():
 		velocity.y += G.P_GRAVITY
-
-	elif is_on_ceiling():
-		velocity.y += G.P_GRAVITY * 2
-
-	elif is_on_floor():
+	else:
 		velocity.y = 0
 
 func _Jump(): 
@@ -52,23 +69,25 @@ func _Movement():
 		velocity.x = move_toward(velocity.x, 0, G.P_SPEED)
 	move_and_slide()
 
-func _AnimationLogic(): 
-	if attacking: 
-		#Attack animations are here but not implemented cuz magic system isnt here yet
-		pass
+func _AnimationLogic():
+	if attacking:
+		if animation.animation != "Charge_1_wa":
+			animation.play("Charge_1_wa")
 			
-	elif is_zero_approx(velocity.x): 
-		animation.play("Idle")
-
+	elif is_zero_approx(velocity.x):
+		if animation.animation != "Idle":
+			animation.play("Idle")
+			
 	else:
-		animation.play("Run") 
-		
+		if animation.animation != "Run":
+			animation.play("Run")
+
 	animation.flip_h = direction2
 
 func _Health():
 	if Input.is_action_just_pressed("J"):
 		hp.value = clamp(hp.value - 5, hp.min_value, hp.max_value)
 		
-		if hp.value == 0:
+		if hp.value <= 0:
 			animation.play("Death")
 			queue_free()

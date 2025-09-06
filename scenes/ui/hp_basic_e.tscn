@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgexmbrpi1h4p"]
+
+[ext_resource type="Texture2D" uid="uid://71v4sknr7xgj" path="res://assets/art/HP/basic enemy HP.png" id="1_51rj1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkfij"]
+atlas = ExtResource("1_51rj1")
+region = Rect2(0.00313377, 11.0849, 160.065, 11.9484)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvc2s"]
+atlas = ExtResource("1_51rj1")
+region = Rect2(0, 0, 160, 11.2365)
+
+[node name="HP-Basic E" type="CanvasGroup"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+max_value = 50.0
+texture_under = SubResource("AtlasTexture_bkfij")
+texture_progress = SubResource("AtlasTexture_wvc2s")
