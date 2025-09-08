@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-
-
 var player_position
 var target
 var direction: int = 1
@@ -64,8 +62,7 @@ func _PlayerTracking():
 	target = (player_position - position).normalized()
 
 	if position.distance_to(player_position) > 3:
-		velocity.x = target.x * G.S_SPEED  
-		animation.play("Run")
+		velocity.x = target.x * G.GOLEM_SPEED
 
 	else:
 		velocity.x = 0  

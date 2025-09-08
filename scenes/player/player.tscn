@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dtcjyc1dy4n2k"]
+[gd_scene load_steps=56 format=3 uid="uid://dtcjyc1dy4n2k"]
 
 [ext_resource type="Texture2D" uid="uid://ddag3d43dscr5" path="res://assets/art/Blue_witch/B_witch_idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bhpkxc2kcoujt" path="res://scripts/player/player.gd" id="1_75vfm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ckuywgfeofru2" path="res://assets/art/Blue_witch/B_witch_death.png" id="2_75vfm"]
 [ext_resource type="Texture2D" uid="uid://blcd2yxcvq0qk" path="res://assets/art/Blue_witch/B_witch_charge.png" id="3_qek5x"]
 [ext_resource type="Texture2D" uid="uid://cydr4q5sxjp0l" path="res://assets/art/Blue_witch/B_witch_run.png" id="4_0owmy"]
+[ext_resource type="Texture2D" uid="uid://xewbfn388j41" path="res://assets/art/Blue_witch/B_witch_smoll_charge.png" id="4_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://w1sc1i4clo4s" path="res://assets/art/Blue_witch/B_witch_take_damage.png" id="5_qek5x"]
 [ext_resource type="PackedScene" uid="uid://esvnlk1dsgcv" path="res://scenes/ui/HP.tscn" id="7_0owmy"]
 
@@ -67,6 +68,10 @@ region = Rect2(0, 144, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rw8a5"]
 atlas = ExtResource("3_qek5x")
 region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwuka"]
+atlas = ExtResource("4_5gtgg")
+region = Rect2(0, 0, 60, 47)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uf5tr"]
 atlas = ExtResource("2_75vfm")
@@ -240,6 +245,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_iwuka")
+}],
+"loop": true,
+"name": &"Charge_smoll_1_wa",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uf5tr")
 }, {
 "duration": 1.0,
@@ -357,7 +370,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5gtgg")
-animation = &"Charge_1_wa"
+animation = &"Charge_smoll_1_wa"
 speed_scale = 1.7
 
 [node name="Camera2D" type="Camera2D" parent="."]

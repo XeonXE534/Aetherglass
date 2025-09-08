@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsn7o6pgg3k3t"]
+
+[ext_resource type="Script" uid="uid://bqynhd8y335yh" path="res://scripts/player/elemental_balls.gd" id="1_dk4y2"]
+[ext_resource type="Texture2D" uid="uid://bkbc5p57cx30q" path="res://assets/art/player_attack/water/elemental_balls.png" id="2_n8xu4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5cgb"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk4y2"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khj1o"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bknuu"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xtua"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oejkf"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs32v"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dk4y2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk4y2")
+}],
+"loop": true,
+"name": &"dark",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khj1o")
+}],
+"loop": true,
+"name": &"earth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bknuu")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xtua")
+}],
+"loop": true,
+"name": &"ice",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oejkf")
+}],
+"loop": true,
+"name": &"light",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs32v")
+}],
+"loop": true,
+"name": &"water",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"wind",
+"speed": 5.0
+}]
+
+[node name="waterball" type="Area2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_dk4y2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n5cgb")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="States" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_dk4y2")
+animation = &"earth"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
