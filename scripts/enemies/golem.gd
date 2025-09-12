@@ -12,7 +12,6 @@ var can_damage: bool = true
 @onready var body_area = $Body
 @onready var hp = $"HP-Basic E/MarginContainer/TextureProgressBar"
 
-
 func _ready() -> void:
 	hp.value = hp.max_value
 	animation.play("Idle")
@@ -27,17 +26,21 @@ func TakeDamage(amount: int) -> void:
 		return
 
 	hp.value = clamp(hp.value - amount, hp.min_value, hp.max_value)
-	print("HP:", hp.value)
+	animation.play("Hit")
 
 	if hp.value <= 0:
-		Die()
+		is_dead = true
+		$"HP-Basic E".visible = false
+		set_deferred("collision_mask", Layers.GROUND) 
+		animation.play("Death")
 
-func Die():
-	is_dead = true
-	velocity = Vector2.ZERO
-	animation.play("Death")
-	queue_free()
+func _On_Animation_Finished() -> void:
+	if animation.animation == "Death":
+		queue_free()
 
+func _OnDamageCooldownTimeout():
+	can_damage = true
+	
 func _Movement(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta  
@@ -54,9 +57,6 @@ func _Movement(delta: float) -> void:
 
 	move_and_slide()
 
-func _on_DamageCooldown_timeout():
-	can_damage = true
-	
 func _PlayerTracking():
 	player_position = player.position
 	target = (player_position - position).normalized()

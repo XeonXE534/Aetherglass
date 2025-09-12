@@ -23,7 +23,6 @@ func _physics_process(_delta: float) -> void:
 
 func _Attack():
 	if Input.is_action_just_pressed("SPACE") and not attacking:
-		print('Attacked')
 		attacking = true
 		$AtkTimer.start()
 		_ShootProjectile()
@@ -40,7 +39,7 @@ func _ShootProjectile():
 		projectile.direction = Vector2.LEFT
 	else:
 		projectile.direction = Vector2.RIGHT
-	
+
 func _Gravity(): 
 	if not is_on_floor():
 		velocity.y += G.PLAYER_GRAVITY
