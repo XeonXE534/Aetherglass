@@ -1,7 +1,7 @@
 extends Node
 
 func _ready() -> void:
-        print("GLOBALS LOADED - 1")
+        print("GLOBALS LOADED - 1/3 [Game Config]")
         
 # Player vars and consts
 @export var PLAYER_SPEED: float = 350.0

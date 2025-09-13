@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhiql60edl3l4"]
 
-[ext_resource type="Script" uid="uid://c8iwik22r4bi8" path="res://scripts/globals/global.gd" id="1_at3qq"]
+[ext_resource type="Script" uid="uid://c8iwik22r4bi8" path="res://scripts/globals/game_config.gd" id="1_at3qq"]
 
 [node name="GLOBAL CONTROLS" type="Node2D"]
 script = ExtResource("1_at3qq")

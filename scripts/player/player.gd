@@ -8,6 +8,7 @@ var direction2: bool = false
 @onready var hp = $HP/MarginContainer/TextureProgressBar
 
 func _ready() -> void:
+	print("PLAYER LOADED")
 	hp.value = 100
 	animation.play("Idle")
 
@@ -42,20 +43,20 @@ func _ShootProjectile():
 
 func _Gravity(): 
 	if not is_on_floor():
-		velocity.y += G.PLAYER_GRAVITY
+		velocity.y += GameConfig.PLAYER_GRAVITY
 	else:
 		velocity.y = 0
 
 func _Jump(): 
 	if Input.is_action_just_pressed("W") and is_on_floor() and attacking == false:
-		velocity.y = G.PLAYER_JUMP_VELOCITY
+		velocity.y = GameConfig.PLAYER_JUMP_VELOCITY
 		jumping = true
 
-func _Movement(): 
+func _Movement():
 	var direction := Input.get_axis("A", "D")
 
 	if direction:
-		velocity.x = direction * G.PLAYER_SPEED
+		velocity.x = direction * GameConfig.PLAYER_SPEED
 
 		if direction > 0:
 			direction2 = false
@@ -64,9 +65,13 @@ func _Movement():
 			direction2 = true
 
 	else:
-		velocity.x = move_toward(velocity.x, 0, G.PLAYER_SPEED)
-	move_and_slide()
+		velocity.x = move_toward(velocity.x, 0, GameConfig.PLAYER_SPEED)
 
+	move_and_slide()
+	var debug = get_tree().get_first_node_in_group("debug")
+	if debug:
+		debug.update_player_velocity(velocity)
+		
 func _AnimationLogic():
 	if attacking:
 		if animation.animation != "Charge_smoll_1_wa":

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var player_position
 var target
-var direction: int = 1
+var direction: bool
 var is_dead: bool = false
 var can_damage: bool = true
 
@@ -12,7 +12,10 @@ var can_damage: bool = true
 @onready var body_area = $Body
 @onready var hp = $"HP-Basic E/MarginContainer/TextureProgressBar"
 
+@export var element: String = "earth"
+
 func _ready() -> void:
+	print("GOLEM LOADED")
 	hp.value = hp.max_value
 	animation.play("Idle")
 	player_position = player.position
@@ -24,17 +27,19 @@ func _physics_process(delta: float) -> void:
 func TakeDamage(amount: int) -> void:
 	if is_dead:
 		return
-
+	
 	hp.value = clamp(hp.value - amount, hp.min_value, hp.max_value)
+	get_tree().get_first_node_in_group("debug").update_enemy_hp(hp.value, hp.max_value)
+	get_tree().get_first_node_in_group("debug").update_damage(amount)
 	animation.play("Hit")
 
 	if hp.value <= 0:
 		is_dead = true
 		$"HP-Basic E".visible = false
-		set_deferred("collision_mask", Layers.GROUND) 
 		animation.play("Death")
 
-func _On_Animation_Finished() -> void:
+
+func _OnAnimationFinished() -> void:
 	if animation.animation == "Death":
 		queue_free()
 
@@ -42,14 +47,22 @@ func _OnDamageCooldownTimeout():
 	can_damage = true
 	
 func _Movement(delta: float) -> void:
+	if is_dead:
+		velocity = Vector2.ZERO
+		return
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta  
 
-	if velocity.x > 0:
-		animation.flip_h = false
+	if velocity.x > 0:		
+		animation.play("Run")
+		direction = false
+		animation.flip_h = direction
 
 	elif velocity.x < 0:
-		animation.flip_h = true
+		animation.play("Run")
+		direction = true
+		animation.flip_h = direction
 	
 	else:
 		animation.play("Idle")
@@ -58,12 +71,16 @@ func _Movement(delta: float) -> void:
 	move_and_slide()
 
 func _PlayerTracking():
+	if is_dead:
+		return
+
 	player_position = player.position
 	target = (player_position - position).normalized()
 
-	if position.distance_to(player_position) > 3:
-		velocity.x = target.x * G.GOLEM_SPEED
+	if position.distance_to(player_position) > 50:
+		velocity.x = target.x * GameConfig.GOLEM_SPEED
 
 	else:
+		animation.flip_h = direction
 		velocity.x = 0  
 		animation.play("Idle")

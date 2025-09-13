@@ -1,7 +1,7 @@
 extends Node
 
 func _ready() -> void:
-        print("GLOBALS LOADED - 2")
+        print("GLOBALS LOADED - 2/3 [Layers]")
 
 # Collision layers
 const PLAYER       = 1 << 0   # Layer 1

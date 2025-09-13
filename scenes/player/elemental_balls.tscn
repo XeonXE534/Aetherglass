@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsn7o6pgg3k3t"]
+[gd_scene load_steps=12 format=3 uid="uid://bsn7o6pgg3k3t"]
 
 [ext_resource type="Script" uid="uid://bqynhd8y335yh" path="res://scripts/player/elemental_balls.gd" id="1_dk4y2"]
 [ext_resource type="Texture2D" uid="uid://bkbc5p57cx30q" path="res://assets/art/player_attack/water/elemental_balls.png" id="2_n8xu4"]
@@ -29,6 +29,10 @@ region = Rect2(80, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs32v"]
 atlas = ExtResource("2_n8xu4")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2x0b"]
+atlas = ExtResource("2_n8xu4")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dk4y2"]
 animations = [{
@@ -80,7 +84,10 @@ animations = [{
 "name": &"water",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2x0b")
+}],
 "loop": true,
 "name": &"wind",
 "speed": 5.0
@@ -101,7 +108,7 @@ one_shot = true
 [node name="States" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dk4y2")
-animation = &"earth"
+animation = &"wind"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

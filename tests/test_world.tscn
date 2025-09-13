@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://c87f81rhahydt"]
+[gd_scene load_steps=10 format=4 uid="uid://c87f81rhahydt"]
 
 [ext_resource type="Script" uid="uid://de3w8j0nky80t" path="res://tests/test_world.gd" id="1_2o0ge"]
 [ext_resource type="PackedScene" uid="uid://dtcjyc1dy4n2k" path="res://scenes/player/player.tscn" id="1_3nrhp"]
 [ext_resource type="Texture2D" uid="uid://c6nrt21rvuwqx" path="res://assets/art/bg/country-platform-files/layers/country-platform-back.png" id="1_6h17p"]
 [ext_resource type="Texture2D" uid="uid://dkdmiu30ytcaj" path="res://assets/art/bg/Day-Platformer/PNG/tileset.png" id="2_vhhne"]
 [ext_resource type="PackedScene" uid="uid://c78mx5ihymfk1" path="res://scenes/enemies/golem.tscn" id="4_7nija"]
+[ext_resource type="PackedScene" uid="uid://c0bfsyufsvgug" path="res://scenes/ui/debug_overlay.tscn" id="6_lchgu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6h17p"]
 texture = ExtResource("2_vhhne")
@@ -169,3 +170,5 @@ tile_set = SubResource("TileSet_2o0ge")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 position = Vector2(1239, 1978)
 shape = SubResource("RectangleShape2D_6h17p")
+
+[node name="DebugOverlay" parent="." instance=ExtResource("6_lchgu")]

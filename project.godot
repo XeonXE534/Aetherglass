@@ -17,12 +17,17 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-G="*res://scripts/globals/global.gd"
+GameConfig="*res://scripts/globals/game_config.gd"
 Layers="*res://scripts/globals/layers.gd"
+ElementSynergy="*res://scripts/globals/element_synergy.gd"
 
 [display]
 
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
@@ -67,7 +72,6 @@ H={
 2d_physics/layer_1="player"
 2d_physics/layer_2="boss"
 2d_physics/layer_3="basic enemy"
-2d_physics/layer_20="attacks"
 2d_physics/layer_32="ground"
 
 [rendering]

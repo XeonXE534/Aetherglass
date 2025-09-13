@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0bfsyufsvgug"]
+
+[ext_resource type="Script" uid="uid://ditdjnni0k411" path="res://scripts/ui/debug_overlay.gd" id="1_tasbd"]
+[ext_resource type="Theme" uid="uid://jjyls1trmb32" path="res://scenes/themes/pixel_font1.tres" id="2_xx5dy"]
+
+[node name="DebugOverlay" type="CanvasLayer" groups=["debug"]]
+script = ExtResource("1_tasbd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -158.0
+offset_right = 47.0
+grow_vertical = 0
+
+[node name="HPLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "NULL!"
+
+[node name="DamageLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "NULL!"
+
+[node name="PlayerElementLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "NULL!"
+
+[node name="EnemyElementLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "NULL!"
+
+[node name="EffectivenessLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "NULL!"
+
+[node name="VelocityLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "NULL!"
