@@ -11,7 +11,7 @@ Players will explore a mysterious world, create and cast custom spells, and face
 - **Custom Spell System:** Players can create spells using modular elements, modifiers, and effects.  
 - **Skill-Based Combat:** Enemy encounters and bosses reward precision, timing, and spell mastery.  
 - **Dynamic Environment:** Magic interacts with the world (e.g., Fire + Water → Steam).  
-- **Exploration:** Unlock new areas and secrets using spells and abilities.  
+- **Lean AF:** Is made to be able to run on a potato basically 
 
 ---
 
