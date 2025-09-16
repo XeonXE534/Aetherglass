@@ -382,7 +382,7 @@ zoom = Vector2(2, 2)
 position = Vector2(-267, -195)
 
 [node name="AtkTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.16
 one_shot = true
 
 [connection signal="timeout" from="AtkTimer" to="." method="_on_AtkTimer_timeout"]

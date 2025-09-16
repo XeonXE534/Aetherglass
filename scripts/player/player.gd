@@ -9,7 +9,8 @@ var direction2: bool = false
 
 func _ready() -> void:
 	print("PLAYER LOADED")
-	hp.value = 100
+	hp.value = GameConfig.PLAYER["max_health"]
+	hp.max_value = GameConfig.PLAYER["max_health"]
 	animation.play("Idle")
 
 func _process(_delta: float) -> void:
@@ -32,7 +33,7 @@ func _on_AtkTimer_timeout():
 	attacking = false
 
 func _ShootProjectile():
-	var projectile = preload("res://scenes/player/elemental_balls.tscn").instantiate()
+	var projectile = preload("res://scenes/player_atks/elemental_balls.tscn").instantiate()
 	get_parent().add_child(projectile)
 	projectile.position = position
 	
@@ -43,20 +44,20 @@ func _ShootProjectile():
 
 func _Gravity(): 
 	if not is_on_floor():
-		velocity.y += GameConfig.PLAYER_GRAVITY
+		velocity.y += GameConfig.PLAYER["gravity"]
 	else:
 		velocity.y = 0
 
 func _Jump(): 
 	if Input.is_action_just_pressed("W") and is_on_floor() and attacking == false:
-		velocity.y = GameConfig.PLAYER_JUMP_VELOCITY
+		velocity.y = GameConfig.PLAYER["jump_velocity"]
 		jumping = true
 
 func _Movement():
 	var direction := Input.get_axis("A", "D")
 
 	if direction:
-		velocity.x = direction * GameConfig.PLAYER_SPEED
+		velocity.x = direction * GameConfig.PLAYER["speed"]
 
 		if direction > 0:
 			direction2 = false
@@ -65,7 +66,7 @@ func _Movement():
 			direction2 = true
 
 	else:
-		velocity.x = move_toward(velocity.x, 0, GameConfig.PLAYER_SPEED)
+		velocity.x = move_toward(velocity.x, 0, GameConfig.PLAYER["speed"])
 
 	move_and_slide()
 	var debug = get_tree().get_first_node_in_group("debug")
@@ -94,3 +95,4 @@ func _Health():
 		if hp.value <= 0:
 			animation.play("Death")
 			queue_free()
+			OS.crash("Temp alpha death test")

@@ -4,17 +4,17 @@ func _ready() -> void:
 	print("GLOBALS LOADED - 3/3 [Element Synergy]")
 
 @export var weaknesses = {
-	"fire": ["water"],
-	"water": ["fire"],
-	"earth": ["wind"],
-	"wind": ["earth"]
+	"fire"	:["water"],
+	"water"	:["fire"],
+	"earth"	:["wind"],
+	"wind"	:["earth"]
 }
 
 @export var resistances = {
-	"fire": ["fire"],
-	"water": ["water"],
-	"earth": ["earth"],
-	"wind": ["wind"]
+	"fire"	:["fire"],
+	"water"	:["water"],
+	"earth"	:["earth"],
+	"wind"	:["wind"]
 }
 
 func GET_MULTIPLIER(enemy, attack_element: String) -> float:
@@ -55,7 +55,6 @@ func APPLY_ELEMENTAL_DAMAGE(enemy: Node, base_damage: int, attack_element: Strin
 
 	var debug = get_tree().get_first_node_in_group("debug")
 	if debug:
-		debug.update_player_element(attack_element)
 		debug.update_enemy_element(enemy.element)
 		debug.update_effectiveness(multiplier)
 		debug.update_damage(final_damage)

@@ -11,6 +11,8 @@ var last_damage: int = 0
 
 func _ready() -> void:
 	print("DEBUG LOADED [Debug Overlay]")
+	player_element_label.text = "Player Element: %s" % GameConfig.PLAYER["element"]
+	
 
 func update_enemy_hp(current: int, enemy_max: int) -> void:
 	hp_label.text = "Enemy HP: %d / %d" % [current, enemy_max]
@@ -18,9 +20,6 @@ func update_enemy_hp(current: int, enemy_max: int) -> void:
 func update_damage(amount: int) -> void:
 	last_damage = amount
 	dmg_label.text = "Damage Dealt: %d" % amount
-
-func update_player_element(element: String) -> void:
-	player_element_label.text = "Player Element: %s" % element
 
 func update_enemy_element(element: String) -> void:
 	enemy_element_label.text = "Enemy Element: %s" % element
@@ -39,4 +38,4 @@ func update_effectiveness(multiplier: float) -> void:
 		effectiveness_label.text = "Effectiveness: Resist :("
 		
 	else:
-		effectiveness_label.text = "Effectiveness: %.2fx" % multiplier
+		effectiveness_label.text = "Effectiveness: tf is this???? (o_o)!?"

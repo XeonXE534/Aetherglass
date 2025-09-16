@@ -44,3 +44,8 @@ text = "NULL!"
 layout_mode = 2
 theme = ExtResource("2_xx5dy")
 text = "NULL!"
+
+[node name="Credits" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_xx5dy")
+text = "Credits: unTied Games. All assests from Itch.io!"

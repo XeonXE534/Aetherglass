@@ -11,9 +11,12 @@ config_version=5
 [application]
 
 config/name="Aetherglass"
+config/description="a cool-ish game"
+config/version="v3.1.0-alpha"
 run/main_scene="uid://c87f81rhahydt"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/image="uid://l7e4rqwjm0d5"
+config/icon="uid://l7e4rqwjm0d5"
 
 [autoload]
 
@@ -24,6 +27,12 @@ ElementSynergy="*res://scripts/globals/element_synergy.gd"
 [display]
 
 window/stretch/mode="viewport"
+
+[global_group]
+
+enemies=""
+earth=""
+water=""
 
 [gui]
 
