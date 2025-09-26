@@ -2,15 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://c8bi0q5n5egei" path="res://assets/art/HP/HP+MANA1.png" id="1_glps6"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_glps6"]
+atlas = ExtResource("1_glps6")
+region = Rect2(0, 16, 160, 11)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bmwi"]
 atlas = ExtResource("1_glps6")
-region = Rect2(1599.99, 0.010042, 160.007, 12.0089)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k34tx"]
-atlas = ExtResource("1_glps6")
-region = Rect2(-0.136917, -0.135844, 160.228, 12.1246)
+region = Rect2(0, 0, 160, 11)
 
 [node name="HP" type="CanvasGroup"]
+texture_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_direction = 2
@@ -18,8 +19,7 @@ offset_right = 160.0
 offset_bottom = 12.0
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
-texture_filter = 1
 layout_mode = 2
 rounded = true
-texture_under = SubResource("AtlasTexture_6bmwi")
-texture_progress = SubResource("AtlasTexture_k34tx")
+texture_under = SubResource("AtlasTexture_glps6")
+texture_progress = SubResource("AtlasTexture_6bmwi")

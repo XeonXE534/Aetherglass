@@ -3,14 +3,14 @@ extends Node
 func _ready() -> void:
 	print("GLOBALS LOADED - 3/3 [Element Synergy]")
 
-@export var weaknesses = {
+var weaknesses = {
 	"fire"	:["water"],
 	"water"	:["fire"],
 	"earth"	:["wind"],
 	"wind"	:["earth"]
 }
 
-@export var resistances = {
+var resistances = {
 	"fire"	:["fire"],
 	"water"	:["water"],
 	"earth"	:["earth"],

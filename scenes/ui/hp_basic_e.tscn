@@ -11,13 +11,13 @@ atlas = ExtResource("1_51rj1")
 region = Rect2(0, 0, 160, 11.2365)
 
 [node name="HP-Basic E" type="CanvasGroup"]
+texture_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
-texture_filter = 1
 layout_mode = 2
 max_value = 50.0
 texture_under = SubResource("AtlasTexture_bkfij")

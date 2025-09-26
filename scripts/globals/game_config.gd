@@ -4,12 +4,12 @@ func _ready() -> void:
         print("GLOBALS LOADED - 1/3 [Game Config]")
         
 # Player stats dictionary
-const PLAYER = {
+var PLAYER = {
     "speed": 350.0,
     "jump_velocity": -500.0,
     "gravity": 20.0,
     "max_health": 100,
-    "element": "fire"
+    "element": "wind"
 }
 
 # Enemy stats dictionary

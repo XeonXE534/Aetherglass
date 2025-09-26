@@ -360,6 +360,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+texture_filter = 1
 collision_mask = 2147483655
 script = ExtResource("1_75vfm")
 metadata/_edit_vertical_guides_ = [-56.0, -57.0]
@@ -369,7 +370,6 @@ position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5gtgg")
 animation = &"Idle"
 speed_scale = 1.7

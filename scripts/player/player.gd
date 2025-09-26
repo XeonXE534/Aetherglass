@@ -16,6 +16,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_AnimationLogic()
 	_Health()
+	_ElementSwitch()
 
 func _physics_process(_delta: float) -> void:
 	_Gravity()
@@ -96,3 +97,16 @@ func _Health():
 			animation.play("Death")
 			queue_free()
 			OS.crash("Temp alpha death test")
+
+var elements = ["fire", "water", "earth", "wind"]
+
+func _ElementSwitch():
+	if Input.is_action_just_pressed("TAB"):
+		var current_idx = elements.find(GameConfig.PLAYER["element"])
+		var next_idx = (current_idx + 1) % elements.size()
+
+		GameConfig.PLAYER["element"] = elements[next_idx]
+		
+		var debug = get_tree().get_first_node_in_group("debug")
+		if debug:
+			debug.update_player_element()
