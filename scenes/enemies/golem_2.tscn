@@ -1,7 +1,7 @@
 [gd_scene load_steps=56 format=3 uid="uid://c78mx5ihymfk1"]
 
 [ext_resource type="Texture2D" uid="uid://bj5khofn30u0c" path="res://assets/art/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_idle.png" id="1_br26l"]
-[ext_resource type="Script" uid="uid://du1o5rnxiqjcy" path="res://scripts/enemies/golem_2.gd" id="1_q4jum"]
+[ext_resource type="Script" uid="uid://506irb42nwbl" path="res://scripts/enemies/golem.gd" id="1_cca1r"]
 [ext_resource type="Texture2D" uid="uid://mffw2er828bw" path="res://assets/art/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_attack.png" id="2_wlm1w"]
 [ext_resource type="Texture2D" uid="uid://qrpr3i10et6u" path="res://assets/art/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_die.png" id="3_3w385"]
 [ext_resource type="Texture2D" uid="uid://dxvy0vnqhw5oa" path="res://assets/art/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_hurt.png" id="4_busl6"]
@@ -365,7 +365,7 @@ animations = [{
 texture_filter = 1
 collision_layer = 4
 collision_mask = 2148007943
-script = ExtResource("1_q4jum")
+script = ExtResource("1_cca1r")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
@@ -389,5 +389,8 @@ target_position = Vector2(0, 30)
 [node name="DamageCooldown" type="Timer" parent="."]
 wait_time = 0.1
 
+[node name="AtkTimer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="Animation" to="." method="_OnAnimationFinished"]
 [connection signal="timeout" from="DamageCooldown" to="." method="_OnDamageCooldownTimeout"]
+[connection signal="timeout" from="AtkTimer" to="." method="_on_AtkTimer_timeout"]

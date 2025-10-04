@@ -4,11 +4,11 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkfij"]
 atlas = ExtResource("1_51rj1")
-region = Rect2(0.00313377, 11.0849, 160.065, 11.9484)
+region = Rect2(0, 16, 160, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wvc2s"]
 atlas = ExtResource("1_51rj1")
-region = Rect2(0, 0, 160, 11.2365)
+region = Rect2(0, 0, 160, 11)
 
 [node name="HP-Basic E" type="CanvasGroup"]
 texture_filter = 1

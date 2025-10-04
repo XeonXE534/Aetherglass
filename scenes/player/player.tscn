@@ -121,6 +121,18 @@ region = Rect2(0, 416, 32, 32)
 atlas = ExtResource("2_75vfm")
 region = Rect2(0, 448, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q8fn"]
+atlas = ExtResource("5_qek5x")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wva7c"]
+atlas = ExtResource("5_qek5x")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7obkq"]
+atlas = ExtResource("5_qek5x")
+region = Rect2(0, 96, 32, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmlin"]
 atlas = ExtResource("1_8afob")
 region = Rect2(0, 0, 32, 48)
@@ -176,18 +188,6 @@ region = Rect2(0, 288, 32, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qxvo"]
 atlas = ExtResource("4_0owmy")
 region = Rect2(0, 336, 32, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5q8fn"]
-atlas = ExtResource("5_qek5x")
-region = Rect2(0, 0, 32, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wva7c"]
-atlas = ExtResource("5_qek5x")
-region = Rect2(0, 48, 32, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7obkq"]
-atlas = ExtResource("5_qek5x")
-region = Rect2(0, 96, 32, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5gtgg"]
 animations = [{
@@ -288,8 +288,22 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uniwh")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q8fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wva7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7obkq")
+}],
+"loop": false,
+"name": &"Hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -343,20 +357,6 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5q8fn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wva7c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7obkq")
-}],
-"loop": true,
-"name": &"Take_dmg",
-"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -371,7 +371,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5gtgg")
-animation = &"Idle"
+animation = &"Death"
 speed_scale = 1.7
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -385,4 +385,5 @@ position = Vector2(-267, -195)
 wait_time = 0.16
 one_shot = true
 
+[connection signal="animation_finished" from="Animations" to="." method="_on_Animations_finished"]
 [connection signal="timeout" from="AtkTimer" to="." method="_on_AtkTimer_timeout"]

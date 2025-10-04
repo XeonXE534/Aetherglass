@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://0oehajt0y62l"]
+
+[ext_resource type="Texture2D" uid="uid://kqqpd31xv8fv" path="res://assets/art/obstacles/spike-1.png" id="1_vpddq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_got64"]
+size = Vector2(6, 14)
+
+[node name="spike" type="Area2D"]
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_got64")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vpddq")

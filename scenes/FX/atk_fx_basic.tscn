@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3uqxbxsotrkq"]
+
+[ext_resource type="Script" uid="uid://c02jlfhnk4fi8" path="res://scripts/FX/atk_fx_basic.gd" id="1_f4ud4"]
+[ext_resource type="Texture2D" uid="uid://fo70c5sgvr88" path="res://FX/golem FX/Golem_AttackA_FX.png" id="1_nb8ok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4ud4"]
+atlas = ExtResource("1_nb8ok")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vxwa"]
+atlas = ExtResource("1_nb8ok")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj3gy"]
+atlas = ExtResource("1_nb8ok")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wop3"]
+atlas = ExtResource("1_nb8ok")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4go8d"]
+atlas = ExtResource("1_nb8ok")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7re4a"]
+atlas = ExtResource("1_nb8ok")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b15ds"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4ud4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vxwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj3gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wop3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4go8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7re4a")
+}],
+"loop": false,
+"name": &"ground_stomp_1",
+"speed": 5.0
+}]
+
+[node name="AtkFX-BASIC" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_f4ud4")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b15ds")
+animation = &"ground_stomp_1"
+speed_scale = 1.5
+
+[connection signal="animation_finished" from="Animations" to="." method="_on_animations_animation_finished"]

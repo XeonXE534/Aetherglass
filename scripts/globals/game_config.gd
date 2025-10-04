@@ -1,18 +1,29 @@
 extends Node
 
+@onready var CUTSCENE: bool = false
+
+var count = 0
+
 func _ready() -> void:
         print("GLOBALS LOADED - 1/3 [Game Config]")
-        
-# Player stats dictionary
+
+func _process(_delta: float) -> void:
+        if Input.is_action_just_pressed('1'):
+            CUTSCENE = true
+            count += 1
+
+        if count >= 2:
+            CUTSCENE = false
+            count = 0
+            
 var PLAYER = {
     "speed": 350.0,
     "jump_velocity": -500.0,
     "gravity": 20.0,
-    "max_health": 100,
+    "max_health": 200,
     "element": "wind"
 }
 
-# Enemy stats dictionary
 const ENEMIES = {
     "golem": {
         "speed": 100.0,
@@ -34,7 +45,6 @@ const ENEMIES = {
     }
 }
 
-# Projectile stats dictionary
 const PROJECTILES = {
     "elemental_ball": {
         "speed": 600.0,

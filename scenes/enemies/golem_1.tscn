@@ -293,7 +293,7 @@ shape = SubResource("RectangleShape2D_txad0")
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_i0grc")
-animation = &"Idle"
+animation = &"Atk-1"
 speed_scale = 1.7
 
 [node name="HP-Basic E" parent="." instance=ExtResource("7_hfnnn")]
@@ -308,5 +308,8 @@ target_position = Vector2(0, 30)
 [node name="DamageCooldown" type="Timer" parent="."]
 wait_time = 0.1
 
+[node name="AtkTimer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="Animation" to="." method="_OnAnimationFinished"]
 [connection signal="timeout" from="DamageCooldown" to="." method="_OnDamageCooldownTimeout"]
+[connection signal="timeout" from="AtkTimer" to="." method="_on_AtkTimer_timeout"]

@@ -14,7 +14,7 @@ config/name="Aetherglass"
 config/description="a cool-ish game"
 config/version="v3.1.0-alpha"
 run/main_scene="uid://c87f81rhahydt"
-config/features=PackedStringArray("4.5", "Mobile")
+config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/image="uid://l7e4rqwjm0d5"
 config/icon="uid://l7e4rqwjm0d5"
 
@@ -27,6 +27,10 @@ ElementSynergy="*res://scripts/globals/element_synergy.gd"
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [global_group]
 

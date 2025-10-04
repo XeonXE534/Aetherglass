@@ -1,3 +1,4 @@
+# Made by ChatGPT
 extends CanvasLayer
 
 @onready var hp_label = $VBoxContainer/HPLabel

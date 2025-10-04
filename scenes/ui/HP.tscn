@@ -20,6 +20,7 @@ offset_bottom = 12.0
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
 layout_mode = 2
+max_value = 9.22337e+18
 rounded = true
 texture_under = SubResource("AtlasTexture_glps6")
 texture_progress = SubResource("AtlasTexture_6bmwi")
