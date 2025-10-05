@@ -17,7 +17,7 @@ var _max_hp: int = GameConfig.PLAYER["max_health"]
 var _hybrid_threshold: float = 0.0
 
 @onready var animation = $Animations
-@onready var hp = $HP/MarginContainer/TextureProgressBar
+@onready var hp = get_parent().get_node("HUD/MarginContainer/HP")
 
 func _ready() -> void:
 	print("PLAYER LOADED")
@@ -48,7 +48,7 @@ func _on_Animations_finished() -> void:
 func _HandleAttack() -> void:
 	if Input.is_action_just_pressed("SPACE") and not _attacking and _CanCast():
 		_attacking = true
-		_UseMana(10.0)
+		_UseMana(1.0)
 		$AtkTimer.start()
 		_ShootProjectile()
 

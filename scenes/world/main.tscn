@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvg3tgjouwylh"]
+
+[ext_resource type="PackedScene" uid="uid://dtcjyc1dy4n2k" path="res://scenes/player/player.tscn" id="1_f8fyy"]
+[ext_resource type="PackedScene" uid="uid://d0hmd346bi052" path="res://scenes/enemies/golem_1.tscn" id="2_wbupf"]
+[ext_resource type="PackedScene" uid="uid://b63aspmprd7sh" path="res://scenes/world/chunk_3_A_1.tscn" id="4_6r0uj"]
+[ext_resource type="PackedScene" uid="uid://cxd3h0gnlwwrk" path="res://scenes/world/chunk-1-A-1.tscn" id="4_7tdlr"]
+[ext_resource type="PackedScene" uid="uid://c0bfsyufsvgug" path="res://scenes/ui/debug_overlay.tscn" id="4_wbupf"]
+[ext_resource type="PackedScene" uid="uid://3p5foyl87t86" path="res://scenes/ui/HUD.tscn" id="5_7tdlr"]
+[ext_resource type="PackedScene" uid="uid://bb62vo5fgm65l" path="res://scenes/world/chunk_2_A_1.tscn" id="6_tt8nk"]
+[ext_resource type="PackedScene" uid="uid://c1j7sx3hx76gt" path="res://scenes/enemies/slime.tscn" id="8_j0vxu"]
+[ext_resource type="PackedScene" uid="uid://c78mx5ihymfk1" path="res://scenes/enemies/golem_2.tscn" id="9_ggrwn"]
+
+[node name="arena-1" type="Node2D"]
+texture_filter = 1
+
+[node name="chunk-1-A-1" parent="." instance=ExtResource("4_7tdlr")]
+
+[node name="chunk-2-A-1" parent="." instance=ExtResource("6_tt8nk")]
+position = Vector2(192, 0)
+
+[node name="chunk-2-A-2" parent="." instance=ExtResource("6_tt8nk")]
+position = Vector2(384, 0)
+
+[node name="chunk-2-A-3" parent="." instance=ExtResource("6_tt8nk")]
+position = Vector2(576, 0)
+
+[node name="chunk-2-A-4" parent="." instance=ExtResource("6_tt8nk")]
+position = Vector2(768, 0)
+
+[node name="chunk-2-A-5" parent="." instance=ExtResource("6_tt8nk")]
+position = Vector2(960, 0)
+
+[node name="chunk-2-A-6" parent="." instance=ExtResource("6_tt8nk")]
+position = Vector2(1152, 0)
+
+[node name="chunk-3-A-1" parent="." instance=ExtResource("4_6r0uj")]
+position = Vector2(1344, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_f8fyy")]
+position = Vector2(84, 79)
+
+[node name="DebugOverlay" parent="." instance=ExtResource("4_wbupf")]
+
+[node name="HUD" parent="." instance=ExtResource("5_7tdlr")]
+
+[node name="slime" parent="." instance=ExtResource("8_j0vxu")]
+position = Vector2(744, 123)
+
+[node name="golem" parent="." instance=ExtResource("2_wbupf")]
+position = Vector2(843, 174)
+
+[node name="golem_2" parent="." instance=ExtResource("9_ggrwn")]
+position = Vector2(489, 169)

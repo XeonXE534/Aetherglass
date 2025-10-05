@@ -374,7 +374,7 @@ shape = SubResource("RectangleShape2D_txad0")
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_i0grc")
-animation = &"Hit"
+animation = &"Atk-1"
 speed_scale = 1.7
 
 [node name="HP-Basic E" parent="." instance=ExtResource("7_q4jum")]

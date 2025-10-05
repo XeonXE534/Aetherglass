@@ -12,7 +12,6 @@ var _target: Vector2
 var _direction: bool
 var _is_dead: bool = false
 var _attacking: bool = false
-var _attack_range: float = 50.0
 
 var element: String = "earth"
 
@@ -67,7 +66,7 @@ func _AttackLogic() -> void:
 	if _attacking or _is_dead:
 		return
 
-	if position.distance_to(_player_position) <= _attack_range:
+	if position.distance_to(_player_position) <= GameConfig.ENEMIES["slime"]["attack_range"]:
 		_attacking = true
 		_atk_timer.start()
 		_animation.play(ANIM_ATTACK)
@@ -97,7 +96,7 @@ func _DealDamageToPlayer() -> void:
 	if _is_dead:
 		return
 
-	if position.distance_to(_player.position) <= _attack_range:
+	if position.distance_to(_player.position) <= GameConfig.ENEMIES["slime"]["attack_range"]:
 		_player.TakeDamage(GameConfig.ENEMIES["slime"]["attack_damage"])
 
 func _Movement(delta: float) -> void:
@@ -115,7 +114,7 @@ func _PlayerTracking() -> void:
 	_player_position = _player.position
 	_target = (_player_position - position).normalized()
 
-	if position.distance_to(_player_position) > _attack_range:
+	if position.distance_to(_player_position) > GameConfig.ENEMIES["slime"]["attack_range"]:
 		velocity.x = _target.x * GameConfig.ENEMIES["slime"]["speed"]
 
 	else:

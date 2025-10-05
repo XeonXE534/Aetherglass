@@ -17,7 +17,7 @@ func _process(_delta: float) -> void:
             count = 0
             
 var PLAYER = {
-    "speed": 350.0,
+    "speed": 200.0,
     "jump_velocity": -500.0,
     "gravity": 20.0,
     "max_health": 200,

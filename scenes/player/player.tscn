@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dtcjyc1dy4n2k"]
+[gd_scene load_steps=55 format=3 uid="uid://dtcjyc1dy4n2k"]
 
 [ext_resource type="Texture2D" uid="uid://ddag3d43dscr5" path="res://assets/art/Blue_witch/B_witch_idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bhpkxc2kcoujt" path="res://scripts/player/player.gd" id="1_75vfm"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cydr4q5sxjp0l" path="res://assets/art/Blue_witch/B_witch_run.png" id="4_0owmy"]
 [ext_resource type="Texture2D" uid="uid://xewbfn388j41" path="res://assets/art/Blue_witch/B_witch_smoll_charge.png" id="4_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://w1sc1i4clo4s" path="res://assets/art/Blue_witch/B_witch_take_damage.png" id="5_qek5x"]
-[ext_resource type="PackedScene" uid="uid://esvnlk1dsgcv" path="res://scenes/ui/HP.tscn" id="7_0owmy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(14, 36)
@@ -375,11 +374,12 @@ animation = &"Death"
 speed_scale = 1.7
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -50)
+position = Vector2(0, -130)
 zoom = Vector2(2, 2)
-
-[node name="HP" parent="." instance=ExtResource("7_0owmy")]
-position = Vector2(-267, -195)
+limit_left = 0
+limit_top = 0
+limit_right = 1536
+limit_bottom = 384
 
 [node name="AtkTimer" type="Timer" parent="."]
 wait_time = 0.16

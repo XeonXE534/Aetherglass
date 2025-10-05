@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://3p5foyl87t86"]
+
+[ext_resource type="Texture2D" uid="uid://c8bi0q5n5egei" path="res://assets/art/HP/HP+MANA1.png" id="1_kw0id"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glps6"]
+atlas = ExtResource("1_kw0id")
+region = Rect2(0, 16, 160, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bmwi"]
+atlas = ExtResource("1_kw0id")
+region = Rect2(0, 0, 160, 11)
+
+[node name="HUD" type="CanvasLayer"]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+texture_filter = 1
+layout_direction = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 170.0
+offset_bottom = 22.0
+
+[node name="HP" type="TextureProgressBar" parent="MarginContainer"]
+layout_mode = 2
+max_value = 9.22337e+18
+rounded = true
+texture_under = SubResource("AtlasTexture_glps6")
+texture_progress = SubResource("AtlasTexture_6bmwi")
