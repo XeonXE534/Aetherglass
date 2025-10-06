@@ -111,7 +111,7 @@ func _HandleMovement() -> void:
 	
 	var debug = get_tree().get_first_node_in_group("debug")
 	if debug:
-		debug.update_player_velocity(velocity)
+		debug.UpdatePlayerVelocity(velocity)
 
 func _UpdateAnimation() -> void:
 	if animation.animation in LOCKED_ANIMATIONS:
@@ -134,10 +134,15 @@ func _UpdateAnimation() -> void:
 
 func _HandleElementSwitch() -> void:
 	if Input.is_action_just_pressed("TAB"):
-		var current_idx = _elements.find(GameConfig.PLAYER["element"])
-		var next_idx = (current_idx + 1) % _elements.size()
+		var _current_element = GameConfig.PLAYER.get("element", "wind")
+		var _current_idx = _elements.find(_current_element)
+
+		if _current_idx == -1:
+			_current_idx = 3
+
+		var next_idx = (_current_idx + 1) % _elements.size()
 		GameConfig.PLAYER["element"] = _elements[next_idx]
 		
 		var debug = get_tree().get_first_node_in_group("debug")
 		if debug:
-			debug.update_player_element()
+			debug.UpdatePlayerElement()

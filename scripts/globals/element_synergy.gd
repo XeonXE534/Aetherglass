@@ -6,7 +6,8 @@ enum Element {
 	EARTH,
 	WIND,
 	LIGHT,
-	DARK
+	DARK,
+	NONE
 }
 
 var element_properties = {
@@ -64,56 +65,56 @@ var combo_effects = {
 	"fire+water": {
 		"name": "Steam",
 		"damage_mult": 1.3,
-		"effect": "create_steam_cloud",
+		"effect": "CreateSteamCloud",
 		"description": "Creates obscuring steam, deals DOT"
 	},
 
 	"fire+earth": {
 		"name": "Lava",
 		"damage_mult": 1.5,
-		"effect": "create_lava_pool",
+		"effect": "CreateLavaPool",
 		"description": "Persistent ground hazard"
 	},
 
 	"water+wind": {
 		"name": "Ice Storm",
 		"damage_mult": 1.2,
-		"effect": "apply_freeze",
+		"effect": "ApplyFreeze",
 		"description": "Slows and damages over time"
 	},
 
 	"earth+wind": {
 		"name": "Sandstorm",
 		"damage_mult": 1.1,
-		"effect": "apply_blind",
+		"effect": "ApplyBlind",
 		"description": "Reduces enemy accuracy, small AOE"
 	},
 
 	"fire+wind": {
 		"name": "Wildfire",
 		"damage_mult": 1.4,
-		"effect": "spread_burning",
+		"effect": "SpreadBurning",
 		"description": "Fire spreads to nearby enemies"
 	},
 
 	"water+earth": {
 		"name": "Mud",
 		"damage_mult": 0.9,
-		"effect": "apply_slow",
+		"effect": "ApplySlow",
 		"description": "Heavy slow, reduces movement by 70%"
 	},
 
 	"light+dark": {
 		"name": "Void",
 		"damage_mult": 2.5,
-		"effect": "true_damage",
+		"effect": "TrueDamage",
 		"description": "Ignores all resistances, huge mana cost"
 	},
 	
 	"fire+water+wind": {
 		"name": "Hurricane",
 		"damage_mult": 2.0,
-		"effect": "screen_clear",
+		"effect": "ScreenClear",
 		"description": "Massive AOE, knocks back all enemies"
 	}
 }
@@ -121,7 +122,7 @@ var combo_effects = {
 func _ready() -> void:
 	print("GLOBALS LOADED - 3/3 [Element System]")
 
-func GET_MULTIPLIER(defender_element: int, attack_element: int) -> float:
+func GetMultiplier(defender_element: int, attack_element: int) -> float:
 	if attack_element in weaknesses.get(defender_element, []):
 		return 2.0
 	
@@ -130,7 +131,7 @@ func GET_MULTIPLIER(defender_element: int, attack_element: int) -> float:
 	
 	return 1.0
 
-func COMBINE_ELEMENTS(elements: Array) -> Dictionary:
+func CombineElements(elements: Array) -> Dictionary:
 	if elements.size() == 0:
 		push_error("No elements provided for combination")
 		return {}
@@ -145,7 +146,7 @@ func COMBINE_ELEMENTS(elements: Array) -> Dictionary:
 	
 	var sorted_elements = elements.duplicate()
 	sorted_elements.sort()
-	var combo_key = "+".join(_elements_to_strings(sorted_elements))
+	var combo_key = "+".join(_ElementsToStrings(sorted_elements))
 	
 	if combo_key in combo_effects:
 		var combo = combo_effects[combo_key].duplicate()
@@ -160,7 +161,7 @@ func COMBINE_ELEMENTS(elements: Array) -> Dictionary:
 		"description": "Unfocused elemental energy"
 	}
 
-func APPLY_ELEMENTAL_DAMAGE(enemy: Node, base_damage: int, spell_data: Dictionary) -> void:
+func ApplyElementalDamage(enemy: Node, base_damage: int, spell_data: Dictionary) -> void:
 	if not enemy.has_method("TakeDamage"):
 		push_error("Enemy does not have TakeDamage method")
 		return
@@ -173,7 +174,7 @@ func APPLY_ELEMENTAL_DAMAGE(enemy: Node, base_damage: int, spell_data: Dictionar
 		var total_mult = 0.0
 		
 		for atk_element in spell_data.get("elements", []):
-			total_mult += GET_MULTIPLIER(enemy_element, atk_element)
+			total_mult += GetMultiplier(enemy_element, atk_element)
 		
 		avg_multiplier = total_mult / spell_data["elements"].size()
 
@@ -186,15 +187,15 @@ func APPLY_ELEMENTAL_DAMAGE(enemy: Node, base_damage: int, spell_data: Dictionar
 	if effect != "none" and enemy.has_method("apply_status"):
 		enemy.apply_status(effect)
 	
-	_update_debug(enemy, spell_data, avg_multiplier, combo_mult, final_damage)
+	_UpdateDebug(enemy, spell_data, avg_multiplier, combo_mult, final_damage)
 
-func _elements_to_strings(elements: Array) -> Array:
+func _ElementsToStrings(elements: Array) -> Array:
 	var strings = []
 	for elem in elements:
 		strings.append(Element.keys()[elem].to_lower())
 	return strings
 
-func _update_debug(enemy: Node, spell_data: Dictionary, elem_mult: float, combo_mult: float, damage: int) -> void:
+func _UpdateDebug(enemy: Node, spell_data: Dictionary, elem_mult: float, combo_mult: float, damage: int) -> void:
 	var debug = get_tree().get_first_node_in_group("debug")
 	if debug:
 		if enemy.has_method("get_element"):
@@ -202,3 +203,14 @@ func _update_debug(enemy: Node, spell_data: Dictionary, elem_mult: float, combo_
 		debug.update_spell_combo(spell_data.get("name", "Unknown"))
 		debug.update_effectiveness(elem_mult * combo_mult)
 		debug.update_damage(damage)
+
+func ApplySimpleDmg(enemy: Node, base_damage: int, attack_element: int) -> void:
+	if not enemy.has_method("TakeDamage"):
+		return
+	
+	var multiplier = 1.0
+	if enemy.has_method("get_element"):
+		multiplier = GetMultiplier(enemy.get_element(), attack_element)
+	
+	var final_damage = int(base_damage * multiplier)
+	enemy.TakeDamage(final_damage)

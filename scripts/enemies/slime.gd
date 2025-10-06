@@ -13,7 +13,7 @@ var _direction: bool
 var _is_dead: bool = false
 var _attacking: bool = false
 
-var element: String = "earth"
+var element: String = "water" 
 
 @onready var _player = get_parent().get_node("Player")
 @onready var _animation = $Animation
@@ -43,6 +43,9 @@ func _OnAnimationFinished() -> void:
 	elif _animation.animation == ANIM_DEATH:
 		queue_free()
 
+func GetElement() -> int:
+	return GameConfig.StringToElement(element)
+
 func TakeDamage(amount: int) -> void:
 	if _is_dead:
 		return
@@ -51,8 +54,8 @@ func TakeDamage(amount: int) -> void:
 	
 	var debug = get_tree().get_first_node_in_group("debug")
 	if debug:
-		debug.update_enemy_hp(_hp.value, _hp.max_value)
-		debug.update_damage(amount)
+		debug.UpdateEnemyHP(_hp.value, _hp.max_value)
+		debug.UpdateDamage(amount)
 
 	if _hp.value <= 0:
 		_is_dead = true
@@ -66,7 +69,7 @@ func _AttackLogic() -> void:
 	if _attacking or _is_dead:
 		return
 
-	if position.distance_to(_player_position) <= GameConfig.ENEMIES["slime"]["attack_range"]:
+	if position.distance_to(_player_position) <= GameConfig.ENEMIES["golem"]["attack_range"]:
 		_attacking = true
 		_atk_timer.start()
 		_animation.play(ANIM_ATTACK)
@@ -96,8 +99,8 @@ func _DealDamageToPlayer() -> void:
 	if _is_dead:
 		return
 
-	if position.distance_to(_player.position) <= GameConfig.ENEMIES["slime"]["attack_range"]:
-		_player.TakeDamage(GameConfig.ENEMIES["slime"]["attack_damage"])
+	if position.distance_to(_player.position) <= GameConfig.ENEMIES["golem"]["attack_range"]:
+		_player.TakeDamage(GameConfig.ENEMIES["golem"]["attack_damage"])
 
 func _Movement(delta: float) -> void:
 	if _is_dead:
@@ -114,8 +117,8 @@ func _PlayerTracking() -> void:
 	_player_position = _player.position
 	_target = (_player_position - position).normalized()
 
-	if position.distance_to(_player_position) > GameConfig.ENEMIES["slime"]["attack_range"]:
-		velocity.x = _target.x * GameConfig.ENEMIES["slime"]["speed"]
+	if position.distance_to(_player_position) > GameConfig.ENEMIES["golem"]["attack_range"]:
+		velocity.x = _target.x * GameConfig.ENEMIES["golem"]["speed"]
 
 	else:
 		velocity.x = 0

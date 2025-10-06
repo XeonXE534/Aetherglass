@@ -13,7 +13,7 @@ var _direction: bool
 var _is_dead: bool = false
 var _attacking: bool = false
 
-var element: String = "earth"
+var element: String = "earth" 
 
 @onready var _player = get_parent().get_node("Player")
 @onready var _animation = $Animation
@@ -43,6 +43,9 @@ func _OnAnimationFinished() -> void:
 	elif _animation.animation == ANIM_DEATH:
 		queue_free()
 
+func GetElement() -> int:
+	return GameConfig.StringToElement(element)
+
 func TakeDamage(amount: int) -> void:
 	if _is_dead:
 		return
@@ -51,8 +54,8 @@ func TakeDamage(amount: int) -> void:
 	
 	var debug = get_tree().get_first_node_in_group("debug")
 	if debug:
-		debug.update_enemy_hp(_hp.value, _hp.max_value)
-		debug.update_damage(amount)
+		debug.UpdateEnemyHP(_hp.value, _hp.max_value)
+		debug.UpdateDamage(amount)
 
 	if _hp.value <= 0:
 		_is_dead = true
